@@ -2,14 +2,14 @@
 
 本机若无法安装 Railway CLI（访问 GitHub releases 超时），请用网页完成连接。
 
-仓库：https://github.com/ITYushangChen/shared-planner-backend  
-根目录已有 `Dockerfile` + `railway.toml`（builder = DOCKERFILE）。
+仓库：https://github.com/ITYushangChen/shared-planner  
+后端代码在 `supabase/` 子目录，其中已有 `Dockerfile` + `railway.toml`（builder = DOCKERFILE）。
 
 ## 1. 关联 GitHub 仓库
 
 1. 打开 https://railway.app → 进入你的项目  
-2. 若还没有服务： **New → GitHub Repo** → 选 `shared-planner-backend`  
-3. 若已有服务： **Settings → Source** 确认 Repo 为 `ITYushangChen/shared-planner-backend`，Branch = `main`
+2. 若还没有服务： **New → GitHub Repo** → 选 `shared-planner`  
+3. 若已有服务： **Settings → Source** 确认 Repo 为 `ITYushangChen/shared-planner`，Branch = `main`
 
 ## 2. 构建设置（重要）
 
@@ -17,7 +17,7 @@
 
 | 项 | 值 |
 |----|-----|
-| Root Directory | **留空**（用仓库根 Dockerfile） |
+| Root Directory | **`supabase`**（Dockerfile 与 railway.toml 在 `supabase/` 下） |
 | Builder | Dockerfile（或由 `railway.toml` 指定） |
 | 自定义 Build Command | **清空**（不要写 `cd services/api && npm …`） |
 | 自定义 Start Command | **清空**（Dockerfile 已有 `CMD`） |

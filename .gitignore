@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Env / secrets
+.env
+.env.*
+!.env.local.example
+!.env*.example
+
+# Next.js
+.next/
+out/
+build/
+.vercel
+
+# Debug / OS
+.DS_Store
+Thumbs.db
+*.pem
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE / temp
+.idea/
+.vscode/
+*.swp
+_req*.txt
+_docx_extract.txt
