@@ -7,5 +7,5 @@ export default async function HomePage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  redirect(user ? "/app?view=calendar&range=week" : "/login");
+  redirect(user ? "/app?view=boards&range=week" : "/login");
 }

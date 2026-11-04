@@ -139,12 +139,14 @@ export function AppSidebar({
     });
   }
   const overviewViewRaw = searchParams.get("view");
-  const overviewView =
+  const overviewView: "boards" | "calendar" | "list" =
     overviewViewRaw === "boards"
       ? "boards"
       : overviewViewRaw === "list"
         ? "list"
-        : "calendar";
+        : overviewViewRaw === "calendar"
+          ? "calendar"
+          : "boards";
   const onOverviewPage = pathname === "/app";
   const privateSpaces = spaces.filter((s) => s.visibility !== "public");
   const publicSpaces = spaces.filter((s) => s.visibility === "public");
@@ -214,10 +216,12 @@ export function AppSidebar({
     : null;
 
   const spaceViewRaw = searchParams.get("view");
-  const spaceView =
+  const spaceView: "boards" | "calendar" | "list" =
     spaceViewRaw === "boards" || spaceViewRaw === "list"
       ? spaceViewRaw
-      : "calendar";
+      : spaceViewRaw === "calendar"
+        ? "calendar"
+        : "boards";
 
   useEffect(() => {
     setDrawerOpen(false);
@@ -294,7 +298,7 @@ export function AppSidebar({
   function goOverviewRange(key: "day" | "week" | "month") {
     const params = new URLSearchParams(searchParams.toString());
     params.set("range", key);
-    if (!params.get("view")) params.set("view", "calendar");
+    if (!params.get("view")) params.set("view", "boards");
     const q = params.toString();
     // 空间页内切换日周月，留在当前空间
     if (spaceIdFromPath) {
@@ -335,7 +339,7 @@ export function AppSidebar({
           )}
         </Link>
         <Link
-          href="/app?view=calendar&range=week"
+          href="/app?view=boards&range=week"
           title="总览工作区"
           prefetch
           className={railIconClass(onOverview)}
@@ -514,7 +518,7 @@ export function AppSidebar({
 
         <nav className="flex max-h-[42%] min-h-0 shrink-0 flex-col overflow-y-auto p-2">
           <Link
-            href="/app?view=calendar&range=week"
+            href="/app?view=boards&range=week"
             prefetch
             className={spaceNavClass(onOverview && !onSpaces)}
           >
@@ -769,7 +773,7 @@ export function AppSidebar({
                     ].join(" ")}
                     onClick={() => {
                       setDrawerOpen(false);
-                      softPush("/app?view=calendar&range=week");
+                      softPush("/app?view=boards&range=week");
                     }}
                   >
                     总览工作区
@@ -966,7 +970,7 @@ export function AppSidebar({
                                   return;
                                 }
                                 setDrawerOpen(false);
-                                softPush("/app?view=calendar&range=week", {
+                                softPush("/app?view=boards&range=week", {
                                   refresh: true,
                                 });
                               })();

@@ -26,8 +26,8 @@ function parseOverviewView(raw: string | undefined): "boards" | "calendar" | "li
   if (raw === "calendar") return "calendar";
   if (raw === "list") return "list";
   if (raw === "boards") return "boards";
-  // 无 view 时与登录默认一致：日历
-  return "calendar";
+  // 无 view 时默认：看板（轻量，不挂 FullCalendar）
+  return "boards";
 }
 
 export default async function AppOverviewPage({

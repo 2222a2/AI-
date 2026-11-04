@@ -61,7 +61,7 @@ export function useSpaceNavRealtime() {
                   pathname.startsWith(`/app/spaces/${spaceId}`)
                 ) {
                   // 正在查看被移出/被删除的空间：先跳回总览
-                  router.replace("/app?view=calendar&range=week");
+                  router.replace("/app?view=boards&range=week");
                 }
                 router.refresh();
               });

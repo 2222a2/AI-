@@ -14,7 +14,6 @@ import {
   type ReportTask,
   type ReportType,
 } from "@/lib/reports";
-import { buildReportXlsx } from "@/lib/report-xlsx";
 import {
   getOverviewBounds,
   localDateKey,
@@ -236,6 +235,8 @@ export function ReportWorkspace({
         plainMap = {};
       }
 
+      // 仅在点击导出时才动态加载 exceljs（~900KB），避免拖累报表页首屏
+      const { buildReportXlsx } = await import("@/lib/report-xlsx");
       const buffer = await buildReportXlsx(filteredData, {
         taskPlainText: plainMap,
       });

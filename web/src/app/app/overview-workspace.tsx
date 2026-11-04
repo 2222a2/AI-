@@ -66,7 +66,7 @@ type OverviewTab = "boards" | "calendar" | "list";
 function parseTab(raw: string | null): OverviewTab {
   if (raw === "boards") return "boards";
   if (raw === "list") return "list";
-  return "calendar";
+  return "boards";
 }
 
 function parseRange(raw: string | null): OverviewRange | "all" {

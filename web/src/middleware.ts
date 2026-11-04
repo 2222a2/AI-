@@ -46,7 +46,7 @@ export async function middleware(request: NextRequest) {
   if (user && isLogin) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/app";
-    redirectUrl.search = "view=calendar&range=week";
+    redirectUrl.search = "view=boards&range=week";
     return NextResponse.redirect(redirectUrl);
   }
 

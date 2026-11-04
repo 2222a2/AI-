@@ -1,17 +1,22 @@
 # 登录打通清单
 
+公网前端：**https://ai-yuyu24.vercel.app**  
+公网 API：https://shared-planner-backend-production-a10a.up.railway.app
+
 ## 1. Supabase（必做）
 
 ### A. 关闭邮箱确认（本地开发）
 
 Authentication → Providers → Email → **Confirm email = OFF** → Save
 
-### B. 本地回调地址
+### B. 回调地址（公网已上线）
 
 Authentication → URL Configuration：
 
-- Site URL: `http://localhost:3000`
-- Redirect URLs: `http://localhost:3000/**`
+- Site URL: `https://ai-yuyu24.vercel.app`
+- Redirect URLs:
+  - `https://ai-yuyu24.vercel.app/**`
+  - `http://localhost:3000/**`（本地调试保留）
 
 ### C. 执行 SQL（按顺序）
 

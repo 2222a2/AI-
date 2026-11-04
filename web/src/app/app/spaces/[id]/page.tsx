@@ -29,7 +29,7 @@ const DONE_TODO_LIMIT = 80;
 
 function parseSpaceView(raw: string | undefined): "boards" | "calendar" | "list" {
   if (raw === "boards" || raw === "list") return raw;
-  return "calendar";
+  return "boards";
 }
 
 export default async function SpaceDetailPage({ params, searchParams }: Props) {

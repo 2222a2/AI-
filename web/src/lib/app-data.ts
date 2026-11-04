@@ -60,23 +60,45 @@ const SPACE_SELECT =
   "role, ui_prefs, spaces(id, name, kind, visibility, avatar_url, description)";
 
 /** 同一次请求内复用空间列表（含自动默认空间；展示前请 visibleSpaceNav） */
+// 跨请求内存缓存：降低首屏 TTFB。
+// 注意：不能用 unstable_cache 包裹含 cookies() 的 createClient()（next start 会报
+// "used cookies() inside a function cached with unstable_cache()"）。这里用进程内
+// Map + TTL 规避该限制，同样能跳过重复的 DB 往返。key 含 userId，避免跨用户泄露。
+const SPACE_NAV_TTL_MS = 60_000;
+const spaceNavCache = new Map<
+  string,
+  { value: MembershipRow[]; expires: number }
+>();
+
+async function fetchMemberships(userId: string): Promise<MembershipRow[]> {
+  const supabase = await createClient();
+  const { data: memberships } = await supabase
+    .from("space_members")
+    .select(SPACE_SELECT)
+    .eq("user_id", userId)
+    .order("joined_at", { ascending: true });
+  return (memberships ?? []) as unknown as MembershipRow[];
+}
+
 export const getMySpaceNav = cache(async (): Promise<{
   spaces: SpaceNavItem[];
   spacePrefsById: Record<string, unknown>;
   memberships: MembershipRow[];
 }> => {
-  const { supabase, user } = await getAppAuth();
+  const { user } = await getAppAuth();
   if (!user) {
     return { spaces: [], spacePrefsById: {}, memberships: [] };
   }
 
-  const { data: memberships } = await supabase
-    .from("space_members")
-    .select(SPACE_SELECT)
-    .eq("user_id", user.id)
-    .order("joined_at", { ascending: true });
-
-  const rows = (memberships ?? []) as unknown as MembershipRow[];
+  const now = Date.now();
+  const hit = spaceNavCache.get(user.id);
+  let rows: MembershipRow[];
+  if (hit && hit.expires > now) {
+    rows = hit.value;
+  } else {
+    rows = await fetchMemberships(user.id);
+    spaceNavCache.set(user.id, { value: rows, expires: now + SPACE_NAV_TTL_MS });
+  }
   const { spaces, spacePrefsById } = mapMembershipRows(rows);
 
   return { spaces, spacePrefsById, memberships: rows };

@@ -8,7 +8,7 @@ import {
 } from "@/lib/space-data-cache";
 
 const PREFETCH_HREFS = [
-  "/app?view=calendar&range=week",
+  "/app?view=boards&range=week",
   "/app/notifications",
   "/app/profile",
 ] as const;

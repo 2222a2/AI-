@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  /* 中性灰主色 */
+  /* 统一门户风：蓝色主色 + 中性灰文字 */
   --background: #f5f6f8;
   --foreground: #333943;
 
-  --brand: #b7bbbd;
-  --brand-hover: #9ea3a6;
-  --brand-soft: #eef0f1;
+  --brand: #185FA5;
+  --brand-hover: #0C447C;
+  --brand-soft: #E6F1FB;
   --brand-ink: #3a3f42;
-  --brand-rail: #b7bbbd;
+  --brand-rail: #E6F1FB;
 
   --pri-high: #e5a54b;
   --pri-medium: #b7bbbd;
@@ -24,13 +24,17 @@
 
   --surface: #ffffff;
   --surface-muted: #f5f6f8;
-  --border-muted: #e8eaed;
+  --border-muted: #e3e8ef;
   --text-muted: #9aa3ad;
   --text-secondary: #6b7380;
 
-  --radius-ui: 0.5rem;
-  --shadow-card: 0 1px 2px rgba(58, 63, 66, 0.04);
-  --shadow-card-hover: 0 2px 8px rgba(183, 187, 189, 0.28);
+  --radius-ui: 0.75rem;
+  --radius-card: 1rem;
+  --shadow-card: 0 1px 3px rgba(16, 69, 124, 0.06);
+  --shadow-card-hover: 0 6px 20px rgba(16, 69, 124, 0.10);
+
+  --hero-from: #E6F1FB;
+  --hero-to: #EEEDFE;
 
   --ease-ui: 200ms ease;
 }
@@ -44,7 +48,8 @@
   --color-pri-high: var(--pri-high);
   --color-pri-medium: var(--pri-medium);
   --color-pri-low: var(--pri-low);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+    "Microsoft YaHei", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -56,5 +61,9 @@ body {
 }
 
 body {
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-sans);
+}
+
+.bg-hero-gradient {
+  background: linear-gradient(135deg, var(--hero-from), var(--hero-to));
 }

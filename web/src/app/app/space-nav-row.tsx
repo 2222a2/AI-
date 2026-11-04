@@ -99,7 +99,7 @@ export function SpaceNavRow({
     }
     onNavigate?.();
     startTransition(() => {
-      router.push("/app?view=calendar&range=week");
+      router.push("/app?view=boards&range=week");
       router.refresh();
     });
   }

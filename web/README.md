@@ -15,10 +15,13 @@ copy .env.local.example .env.local
 
 **不要**写入 `service_role`。
 
-同时确认 Supabase Authentication → URL Configuration：
+公网：https://ai-yuyu24.vercel.app  
+API：`NEXT_PUBLIC_API_URL=https://shared-planner-backend-production-a10a.up.railway.app`
 
-- Site URL: `http://localhost:3000`
-- Redirect URLs: `http://localhost:3000/**`
+Supabase Authentication → URL Configuration：
+
+- Site URL: `https://ai-yuyu24.vercel.app`
+- Redirect URLs: `https://ai-yuyu24.vercel.app/**`、`http://localhost:3000/**`
 
 ## 2. 安装与启动
 

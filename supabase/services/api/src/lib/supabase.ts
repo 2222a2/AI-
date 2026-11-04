@@ -2,7 +2,7 @@ import { createClient, type SupabaseClient, type User } from "@supabase/supabase
 import ws from "ws";
 import { config } from "../config";
 
-/** Node（Railway node:20）无原生 WebSocket，需提供 ws 供 supabase-js Realtime 使用 */
+/** Node（Railway node:22）无原生 WebSocket，需提供 ws 供 supabase-js Realtime 使用 */
 const realtimeOpts = {
   transport: ws as unknown as typeof WebSocket,
 };

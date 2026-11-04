@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
       password,
       options: {
         data: { display_name: displayName },
-        emailRedirectTo: `${origin}/auth/callback?next=${encodeURIComponent("/app?view=calendar&range=week")}`,
+        emailRedirectTo: `${origin}/auth/callback?next=${encodeURIComponent("/app?view=boards&range=week")}`,
       },
     });
     if (error) {

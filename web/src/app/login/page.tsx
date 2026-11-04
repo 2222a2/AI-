@@ -25,7 +25,7 @@ function translateAuthError(message: string): string {
 
 function LoginForm() {
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") || "/app?view=calendar&range=week";
+  const next = searchParams.get("next") || "/app?view=boards&range=week";
   const callbackError = searchParams.get("error");
 
   const envOk = useMemo(
@@ -85,7 +85,7 @@ function LoginForm() {
       setMsg("登录成功，正在进入…");
       const dest = next.startsWith("/")
         ? next
-        : "/app?view=calendar&range=week";
+        : "/app?view=boards&range=week";
       // 整页跳转，带上服务端刚写入的 Set-Cookie
       window.location.assign(dest);
     } catch (err) {

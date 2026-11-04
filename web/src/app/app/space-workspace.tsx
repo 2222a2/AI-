@@ -68,7 +68,7 @@ type SpaceView = "boards" | "calendar" | "list";
 
 function parseSpaceView(raw: string | null): SpaceView {
   if (raw === "boards" || raw === "list") return raw;
-  return "calendar";
+  return "boards";
 }
 
 function parseRange(raw: string | null): OverviewRange | "all" {
