@@ -2,7 +2,9 @@ import { createClient, type SupabaseClient, type User } from "@supabase/supabase
 import ws from "ws";
 import { config } from "../config";
 
-/** Node（Railway node:22）无原生 WebSocket，需提供 ws 供 supabase-js Realtime 使用 */
+/** Node（Railway node:20）无原生 WebSocket，需提供 ws 供 supabase-js Realtime 使用。
+ * 精简自托管关闭 Realtime 服务时，设 SUPABASE_REALTIME_ENABLED=false 以禁用。 */
+const realtimeEnabled = process.env.SUPABASE_REALTIME_ENABLED !== "false";
 const realtimeOpts = {
   transport: ws as unknown as typeof WebSocket,
 };
@@ -16,7 +18,7 @@ export function createUserClient(accessToken: string): SupabaseClient {
       persistSession: false,
       autoRefreshToken: false,
     },
-    realtime: realtimeOpts,
+    realtime: realtimeEnabled ? realtimeOpts : undefined,
   });
 }
 
@@ -26,7 +28,7 @@ export function createAdminClient(): SupabaseClient {
       persistSession: false,
       autoRefreshToken: false,
     },
-    realtime: realtimeOpts,
+    realtime: realtimeEnabled ? realtimeOpts : undefined,
   });
 }
 

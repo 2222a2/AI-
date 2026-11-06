@@ -48,8 +48,8 @@ npm run dev
 2. **Root Directory 留空**（不要填 `services/api`，除非你改用子目录 Nixpacks）
 3. 确认使用仓库根 `Dockerfile` / `railway.toml`（builder = DOCKERFILE）
 4. 配置 Variables（见 `.env.example`）
-5. `CORS_ORIGIN=https://ai-yuyu24.vercel.app,http://localhost:3000`
-6. Settings → Networking → Generate Domain（当前：`shared-planner-backend-production-a10a.up.railway.app`）
+5. `CORS_ORIGIN` 填 Vercel 前端域名
+6. Settings → Networking → Generate Domain
 7. Cron Job（可选）：每天请求  
    `POST /jobs/daily-summary`，Header：`x-cron-secret: $CRON_SECRET`
 
@@ -58,9 +58,8 @@ npm run dev
 ## 前端对接
 
 ```env
-NEXT_PUBLIC_API_URL=https://shared-planner-backend-production-a10a.up.railway.app
+NEXT_PUBLIC_API_URL=https://你的服务.up.railway.app
 ```
-
 
 ```ts
 const { data: { session } } = await supabase.auth.getSession()
