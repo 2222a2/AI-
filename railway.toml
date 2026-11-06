@@ -1,0 +1,9 @@
+# 根目录构建配置：Railway 在仓库根找不到应用时按此文件用 Docker 构建
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
